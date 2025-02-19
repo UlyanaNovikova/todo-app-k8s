@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const db = require('./persistence/postgres'); // исправлено здесь
+const db = require('./persistence/postgres'); 
 const getItems = require('./routes/getItems');
 const addItem = require('./routes/addItem');
 const updateItem = require('./routes/updateItem');
