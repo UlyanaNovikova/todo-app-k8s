@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+        - name: todo
+          image: ulyana123/todo-app:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000  # Указываем правильный порт, на котором слушает ваше приложение
+          env:
+            - name: PGHOST
+              value: "postgres-service"  # Имя сервиса PostgreSQL в Kubernetes
+            - name: PGUSER
+              value: "postgres"  # Имя пользователя базы данных
+            - name: PGPASSWORD
+              value: "yourPassword"  # Пароль пользователя базы данных
+            - name: PGDATABASE
+              value: "postgres"  # Имя базы данных

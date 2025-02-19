@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-service
+spec:
+  selector:
+    app: todo
+  ports:
+    - port: 80  # Порт, через который будет доступно приложение
+      targetPort: 3000  # Указываем порт, на котором слушает контейнер
