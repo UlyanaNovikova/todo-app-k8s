@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 let pool;
 
-// Переменные окружения для подключения к базе данных
+
 const {
     PGHOST: HOST,
     PGUSER: USER,
@@ -9,9 +9,8 @@ const {
     PGDATABASE: DB,
 } = process.env;
 
-// Инициализация пула соединений с PostgreSQL
+
 async function init() {
-    // Создание пула соединений с переданными параметрами
     pool = new Pool({
         host: HOST,
         user: USER,
@@ -19,7 +18,6 @@ async function init() {
         database: DB,
     });
 
-    // Подключение к базе данных и создание таблицы, если она не существует
     await pool.connect();
 
     return new Promise((acc, rej) => {
@@ -35,7 +33,6 @@ async function init() {
     });
 }
 
-// Окончание работы с базой данных и закрытие пула соединений
 async function teardown() {
     return new Promise((acc, rej) => {
         pool.end((err) => {
@@ -45,7 +42,6 @@ async function teardown() {
     });
 }
 
-// Получение всех элементов todo из базы данных
 async function getItems() {
     return new Promise((acc, rej) => {
         pool.query('SELECT * FROM todo_items', (err, rows) => {
@@ -61,7 +57,6 @@ async function getItems() {
     });
 }
 
-// Получение одного элемента todo по ID
 async function getItem(id) {
     return new Promise((acc, rej) => {
         pool.query('SELECT * FROM todo_items WHERE id=$1', [id], (err, rows) => {
@@ -77,7 +72,6 @@ async function getItem(id) {
     });
 }
 
-// Сохранение нового элемента todo в базе данных
 async function storeItem(item) {
     return new Promise((acc, rej) => {
         pool.query(
@@ -91,7 +85,6 @@ async function storeItem(item) {
     });
 }
 
-// Обновление элемента todo в базе данных по ID
 async function updateItem(id, item) {
     return new Promise((acc, rej) => {
         pool.query(
@@ -105,7 +98,6 @@ async function updateItem(id, item) {
     });
 }
 
-// Удаление элемента todo по ID
 async function removeItem(id) {
     return new Promise((acc, rej) => {
         pool.query('DELETE FROM todo_items WHERE id = $1', [id], (err) => {
