@@ -1,5 +1,5 @@
 if (process.env.PGHOST) {
-    module.exports = require('./postgres'); // экспортирует postgres.js
+    module.exports = require('./postgres'); // 
 } else {
     module.exports = require('./sqlite'); // 
 }
